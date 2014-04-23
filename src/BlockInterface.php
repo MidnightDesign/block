@@ -11,6 +11,7 @@ interface BlockInterface
 
     /**
      * @param string $id
+     *
      * @return void
      */
     public function setId($id);

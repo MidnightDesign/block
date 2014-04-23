@@ -18,6 +18,7 @@ class Filesystem implements StorageInterface
 
     /**
      * @param BlockInterface $block
+     *
      * @return void
      */
     public function save(BlockInterface $block)
@@ -32,6 +33,7 @@ class Filesystem implements StorageInterface
 
     /**
      * @param string $id
+     *
      * @return string
      */
     private function buildPath($id)
@@ -58,6 +60,7 @@ class Filesystem implements StorageInterface
 
     /**
      * @param string $id
+     *
      * @return BlockInterface
      */
     public function load($id)

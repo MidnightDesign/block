@@ -20,6 +20,7 @@ class Doctrine implements StorageInterface
 
     /**
      * @param BlockInterface $block
+     *
      * @return void
      */
     public function save(BlockInterface $block)
@@ -81,6 +82,7 @@ class Doctrine implements StorageInterface
 
     /**
      * @param string $id
+     *
      * @return BlockInterface
      */
     public function load($id)
