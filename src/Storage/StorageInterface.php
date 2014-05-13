@@ -19,4 +19,11 @@ interface StorageInterface
      * @return BlockInterface
      */
     public function load($id);
+
+    /**
+     * @param BlockInterface $block
+     *
+     * @return void
+     */
+    public function delete(BlockInterface $block);
 }

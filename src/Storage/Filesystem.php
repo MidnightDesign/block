@@ -67,4 +67,14 @@ class Filesystem implements StorageInterface
     {
         return unserialize(file_get_contents($this->buildPath($id)));
     }
+
+    /**
+     * @param BlockInterface $block
+     *
+     * @return void
+     */
+    public function delete(BlockInterface $block)
+    {
+        unlink($this->buildPath($block->getId()));
+    }
 }
