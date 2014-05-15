@@ -3,9 +3,7 @@
 namespace Midnight\Block\Storage;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Midnight\Block\BlockInterface;
-use RuntimeException;
 
 class Doctrine implements StorageInterface
 {
@@ -13,10 +11,8 @@ class Doctrine implements StorageInterface
      * @var ObjectManager
      */
     private $objectManager;
-    /**
-     * @var string
-     */
-    private $className;
+
+    private $class = 'Midnight\Block\AbstractBlock';
 
     /**
      * @param BlockInterface $block
@@ -25,35 +21,29 @@ class Doctrine implements StorageInterface
      */
     public function save(BlockInterface $block)
     {
-        $documentManager = $this->getObjectManager();
-        $documentManager->persist($block);
-        $documentManager->flush();
+        $objectManager = $this->getObjectManager();
+        $objectManager->persist($block);
+        $objectManager->flush();
     }
 
     /**
-     * @throws RuntimeException
-     * @return ObjectRepository
+     * @param string $id
+     *
+     * @return BlockInterface
      */
-    public function getRepository()
+    public function load($id)
     {
-        $className = $this->getClassName();
-        if (!$className) {
-            throw new RuntimeException('No target class set.');
-        }
-        return $this->getObjectManager()->getRepository($className);
+        return $this->getRepository()->find($id);
     }
 
     /**
-     * @throws RuntimeException
-     * @return ObjectManager
+     * @param BlockInterface $block
+     *
+     * @return void
      */
-    public function getObjectManager()
+    public function delete(BlockInterface $block)
     {
-        $objectManager = $this->objectManager;
-        if (!$objectManager) {
-            throw new RuntimeException('No object manager set.');
-        }
-        return $objectManager;
+        // TODO: Implement delete() method.
     }
 
     /**
@@ -65,28 +55,23 @@ class Doctrine implements StorageInterface
     }
 
     /**
+     * @return ObjectManager
+     */
+    private function getObjectManager()
+    {
+        return $this->objectManager;
+    }
+
+    private function getRepository()
+    {
+        return $this->getObjectManager()->getRepository($this->getClass());
+    }
+
+    /**
      * @return string
      */
-    public function getClassName()
+    public function getClass()
     {
-        return $this->className;
-    }
-
-    /**
-     * @param string $className
-     */
-    public function setClassName($className)
-    {
-        $this->className = $className;
-    }
-
-    /**
-     * @param string $id
-     *
-     * @return BlockInterface
-     */
-    public function load($id)
-    {
-        return $this->getRepository()->find($id);
+        return $this->class;
     }
 }
