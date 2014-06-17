@@ -54,10 +54,10 @@ class Filesystem implements StorageInterface
      */
     public function setDirectory($directory)
     {
-        if(!file_exists($directory)) {
+        if (!file_exists($directory)) {
             @mkdir($directory, 0777, true);
         }
-        if(!file_exists($directory)) {
+        if (!file_exists($directory)) {
             throw new \RuntimeException(sprintf('Couldn\'t create "%s".', $directory));
         }
         if (!is_readable($directory)) {
@@ -77,7 +77,11 @@ class Filesystem implements StorageInterface
      */
     public function load($id)
     {
-        return unserialize(file_get_contents($this->buildPath($id)));
+        $path = $this->buildPath($id);
+        if (!is_file($path)) {
+            return null;
+        }
+        return unserialize(file_get_contents($path));
     }
 
     /**
