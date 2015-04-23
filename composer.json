@@ -22,6 +22,7 @@
         "zendframework/zend-stdlib": "~2.4"
     },
     "require-dev": {
-        "doctrine/common": "~2.4"
+        "doctrine/common": "~2.4",
+        "phpunit/phpunit": "~4.6"
     }
 }
