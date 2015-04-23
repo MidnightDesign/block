@@ -11,7 +11,10 @@ class Filesystem implements StorageInterface
      */
     private $directory;
 
-    function __construct($directory)
+    /**
+     * @param string $directory
+     */
+    public function __construct($directory)
     {
         $this->setDirectory($directory);
     }
@@ -55,7 +58,7 @@ class Filesystem implements StorageInterface
     public function setDirectory($directory)
     {
         if (!file_exists($directory)) {
-            @mkdir($directory, 0777, true);
+            mkdir($directory, 0777, true);
         }
         if (!file_exists($directory)) {
             throw new \RuntimeException(sprintf('Couldn\'t create "%s".', $directory));

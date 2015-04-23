@@ -8,7 +8,7 @@ use Traversable;
 class BlockList implements BlockListInterface
 {
     /**
-     * @var BlockInterface[]|Traversable
+     * @var BlockInterface[]
      */
     private $blocks;
 
