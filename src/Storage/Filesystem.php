@@ -58,7 +58,9 @@ class Filesystem implements StorageInterface
     public function setDirectory($directory)
     {
         if (!file_exists($directory)) {
+            set_error_handler(function() { /* ignore errors */ });
             mkdir($directory, 0777, true);
+            restore_error_handler();
         }
         $this->checkDirectory($directory);
         $directory = realpath(($directory));
