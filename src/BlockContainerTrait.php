@@ -38,6 +38,7 @@ trait BlockContainerTrait
      */
     public function getBlocks()
     {
+        $this->ensureBlocks();
         return ArrayUtils::iteratorToArray($this->blocks);
     }
 

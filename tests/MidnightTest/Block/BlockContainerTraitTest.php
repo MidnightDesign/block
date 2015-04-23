@@ -160,7 +160,8 @@ class BlockContainerTraitTest extends PHPUnit_Framework_TestCase
         $this->assertSame($block5, $blocks[4]);
     }
 
-    public function testAddingAnExistingBlockWithNoPositionDoesNothing() {
+    public function testAddingAnExistingBlockWithNoPositionDoesNothing()
+    {
         $container = $this->container;
         $block1 = $this->makeBlock();
         $block2 = $this->makeBlock();
@@ -178,7 +179,8 @@ class BlockContainerTraitTest extends PHPUnit_Framework_TestCase
         $this->assertSame($block3, $blocks[2]);
     }
 
-    public function testAddingAnExistingBlockWithPositionMovesIt() {
+    public function testAddingAnExistingBlockWithPositionMovesIt()
+    {
         $container = $this->container;
         $block1 = $this->makeBlock();
         $block2 = $this->makeBlock();
@@ -194,6 +196,11 @@ class BlockContainerTraitTest extends PHPUnit_Framework_TestCase
         $this->assertSame($block1, $blocks[0]);
         $this->assertSame($block3, $blocks[1]);
         $this->assertSame($block2, $blocks[2]);
+    }
+
+    public function testNewContainerIsEmpty()
+    {
+        $this->assertCount(0, $this->container->getBlocks());
     }
 
     /**
