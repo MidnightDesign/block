@@ -60,15 +60,7 @@ class Filesystem implements StorageInterface
         if (!file_exists($directory)) {
             mkdir($directory, 0777, true);
         }
-        if (!file_exists($directory)) {
-            throw new \RuntimeException(sprintf('Couldn\'t create "%s".', $directory));
-        }
-        if (!is_readable($directory)) {
-            throw new \RuntimeException(sprintf('"%s" is not readable.', $directory));
-        }
-        if (!is_writable($directory)) {
-            throw new \RuntimeException(sprintf('"%s" is not writable.', $directory));
-        }
+        $this->checkDirectory($directory);
         $directory = realpath(($directory));
         $this->directory = $directory;
     }
@@ -95,5 +87,21 @@ class Filesystem implements StorageInterface
     public function delete(BlockInterface $block)
     {
         unlink($this->buildPath($block->getId()));
+    }
+
+    /**
+     * @param $directory
+     */
+    private function checkDirectory($directory)
+    {
+        if (!file_exists($directory)) {
+            throw new \RuntimeException(sprintf('Couldn\'t create "%s".', $directory));
+        }
+        if (!is_readable($directory)) {
+            throw new \RuntimeException(sprintf('"%s" is not readable.', $directory));
+        }
+        if (!is_writable($directory)) {
+            throw new \RuntimeException(sprintf('"%s" is not writable.', $directory));
+        }
     }
 }
