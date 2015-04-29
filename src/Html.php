@@ -2,7 +2,7 @@
 
 namespace Midnight\Block;
 
-class Html extends AbstractBlock implements BlockInterface
+class Html extends AbstractBlock
 {
     /**
      * @var string
