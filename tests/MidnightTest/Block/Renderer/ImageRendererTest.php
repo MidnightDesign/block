@@ -4,6 +4,7 @@ namespace MidnightTest\Block\Renderer;
 
 use InvalidArgumentException;
 use Midnight\Block\BlockInterface;
+use Midnight\Block\Dom\ClassSet;
 use Midnight\Block\Image;
 use Midnight\Block\Renderer\ImageRenderer;
 use PHPUnit_Framework_MockObject_MockObject;
@@ -39,6 +40,18 @@ class ImageRendererTest extends PHPUnit_Framework_TestCase
         $this->renderer->render($block);
     }
 
+    public function testRenderImageWithClasses()
+    {
+        $block = $this->makeImageBlock('foo.jpg');
+        $classes = $block->getClasses();
+        $classes->add('foo');
+        $classes->add('bar');
+
+        $rendered = $this->renderer->render($block);
+
+        $this->assertSame('<img src="foo.jpg" class="foo bar" />', $rendered);
+    }
+
     /**
      * @param string $src
      * @return Image|PHPUnit_Framework_MockObject_MockObject
@@ -53,6 +66,10 @@ class ImageRendererTest extends PHPUnit_Framework_TestCase
             ->expects($this->any())
             ->method('getSrc')
             ->will($this->returnValue($src));
+        $image
+            ->expects($this->any())
+            ->method('getClasses')
+            ->will($this->returnValue(new ClassSet()));
         return $image;
     }
 }

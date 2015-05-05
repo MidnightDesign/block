@@ -2,12 +2,15 @@
 
 namespace Midnight\Block;
 
+use Midnight\Block\Dom\ClassSet;
+use Midnight\Block\Dom\ClassSetInterface;
+
 class Image extends AbstractBlock
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $src;
+    /** @var ClassSetInterface */
+    private $classes;
 
     /**
      * @param string $src
@@ -15,6 +18,7 @@ class Image extends AbstractBlock
     public function __construct($src)
     {
         $this->src = $src;
+        $this->classes = new ClassSet();
     }
 
     /**
@@ -23,5 +27,13 @@ class Image extends AbstractBlock
     public function getSrc()
     {
         return $this->src;
+    }
+
+    /**
+     * @return ClassSetInterface
+     */
+    public function getClasses()
+    {
+        return $this->classes;
     }
 }
