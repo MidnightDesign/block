@@ -59,7 +59,7 @@ class BlockList implements BlockListInterface
     public function getAll()
     {
         if (empty($this->blocks)) {
-            $this->blocks = array();
+            $this->blocks = [];
         }
         return $this->blocks;
     }

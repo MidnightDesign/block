@@ -36,7 +36,7 @@ class BlockRenderer implements RendererInterface
     }
 
     /**
-     * @param string $className
+     * @param string            $className
      * @param RendererInterface $renderer
      */
     public function setRenderer($className, RendererInterface $renderer)

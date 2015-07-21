@@ -43,7 +43,7 @@ class BlockListTest extends PHPUnit_Framework_TestCase
     public function testSetPosition()
     {
         $list = new BlockList();
-        $blocks = array();
+        $blocks = [];
         for ($i = 0; $i < 10; $i++) {
             $block = $this->getMockBlock();
             $blocks[] = $block;
