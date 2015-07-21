@@ -3,7 +3,6 @@
 namespace Midnight\Block;
 
 use Midnight\Block\Exception\BlockNotFoundException;
-use Traversable;
 
 class BlockList implements BlockListInterface
 {
@@ -62,11 +61,6 @@ class BlockList implements BlockListInterface
         if (empty($this->blocks)) {
             $this->blocks = array();
         }
-        //@codeCoverageIgnoreStart
-        if ($this->blocks instanceof Traversable) {
-            $this->blocks = iterator_to_array($this->blocks);
-        }
-        //@codeCoverageIgnoreEnd
         return $this->blocks;
     }
 
