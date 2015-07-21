@@ -1,7 +1,7 @@
 {
     "name": "midnight/block",
     "description": "Blocks of (HTML) content",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
         {
