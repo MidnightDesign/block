@@ -15,4 +15,6 @@ before_script:
   - travis_retry composer install --no-interaction --prefer-source
 
 script:
-  - phpunit --coverage-text --coverage-clover=coverage.clover
+  - phpunit --coverage-clover=coverage.clover
+
+sudo: false
