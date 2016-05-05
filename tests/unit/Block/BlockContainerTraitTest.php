@@ -2,6 +2,7 @@
 
 namespace MidnightTest\Block;
 
+use Midnight\Block\BlockContainerTrait;
 use Midnight\Block\BlockInterface;
 use MidnightTest\Block\Assets\BlockContainerImpl;
 use PHPUnit_Framework_MockObject_MockObject;
@@ -16,7 +17,7 @@ class BlockContainerTraitTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->container = new BlockContainerImpl();
+        $this->container = $this->getObjectForTrait(BlockContainerTrait::class);
     }
 
     public function testAddToEmptyContainer()
@@ -43,17 +44,16 @@ class BlockContainerTraitTest extends PHPUnit_Framework_TestCase
 
     public function testAddAtOccupiedPosition()
     {
-        $container = $this->container;
         $block1 = $this->makeBlock();
         $block2 = $this->makeBlock();
         $block3 = $this->makeBlock();
         $block4 = $this->makeBlock();
-        $container->addBlock($block1);
-        $container->addBlock($block2);
-        $container->addBlock($block3);
+        $this->container->addBlock($block1);
+        $this->container->addBlock($block2);
+        $this->container->addBlock($block3);
 
-        $container->addBlock($block4, 1);
-        $blocks = $container->getBlocks();
+        $this->container->addBlock($block4, 1);
+        $blocks = $this->container->getBlocks();
 
         $this->assertCount(4, $blocks);
         $this->assertSame($block1, $blocks[0]);
@@ -102,8 +102,8 @@ class BlockContainerTraitTest extends PHPUnit_Framework_TestCase
         $container->addBlock($block4);
 
         $container->removeBlock($block2);
+        
         $blocks = $container->getBlocks();
-
         $this->assertCount(3, $blocks);
         $this->assertSame($block1, $blocks[0]);
         $this->assertSame($block3, $blocks[1]);

@@ -15,11 +15,9 @@ class HtmlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($html, $block->getHtml());
     }
 
-    public function testCanSetAndGetId()
+    public function testNewInstanceHasId()
     {
         $block = new Html();
-        $id = 'myId';
-        $block->setId($id);
-        $this->assertEquals($id, $block->getId());
+        $this->assertInternalType('string', $block->getId());
     }
 }

@@ -18,11 +18,12 @@
         "doctrine/orm": "Add support for the Doctrine storage adapter"
     },
     "require": {
-        "php": "~5.5|~7.0",
-        "zendframework/zend-stdlib": "~2.4"
+        "php": "^5.5|^7.0",
+        "ramsey/uuid": "^3.4"
     },
     "require-dev": {
-        "doctrine/common": "~2.4",
-        "phpunit/phpunit": "~4.6"
+        "doctrine/common": "^2.4",
+        "phpunit/phpunit": "^5.0",
+        "mikey179/vfsStream": "^1.6"
     }
 }

@@ -3,6 +3,8 @@
 namespace Midnight\Block\Storage;
 
 use Midnight\Block\BlockInterface;
+use Midnight\Block\Exception\BlockNotFoundException;
+use RuntimeException;
 
 class Filesystem implements StorageInterface
 {
@@ -16,7 +18,7 @@ class Filesystem implements StorageInterface
      */
     public function __construct($directory)
     {
-        $this->setDirectory($directory);
+        $this->directory = $directory;
     }
 
     /**
@@ -26,12 +28,16 @@ class Filesystem implements StorageInterface
      */
     public function save(BlockInterface $block)
     {
-        $id = $block->getId();
-        if (!$id) {
-            $block->setId(uniqid());
-            $id = $block->getId();
+        if (!is_dir($this->directory)) {
+            $mkdirResult = mkdir($this->directory, 0777, true);
+            if ($mkdirResult === false) {
+                throw new RuntimeException(sprintf('Could not create directory "%s".', $this->directory));
+            }
         }
-        file_put_contents($this->buildPath($id), serialize($block));
+        if (!is_writeable($this->directory)) {
+            throw new RuntimeException(sprintf('Cannot save to "%s" because it is not writeable.', $this->directory));
+        }
+        file_put_contents($this->buildPath($block->getId()), serialize($block));
     }
 
     /**
@@ -41,42 +47,19 @@ class Filesystem implements StorageInterface
      */
     private function buildPath($id)
     {
-        return $this->getDirectory() . DIRECTORY_SEPARATOR . $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDirectory()
-    {
-        return $this->directory;
-    }
-
-    /**
-     * @param string $directory
-     */
-    public function setDirectory($directory)
-    {
-        if (!file_exists($directory)) {
-            set_error_handler(function() { /* ignore errors */ });
-            mkdir($directory, 0777, true);
-            restore_error_handler();
-        }
-        $this->checkDirectory($directory);
-        $directory = realpath(($directory));
-        $this->directory = $directory;
+        return $this->directory . DIRECTORY_SEPARATOR . $id;
     }
 
     /**
      * @param string $id
-     *
      * @return BlockInterface
+     * @throws BlockNotFoundException
      */
     public function load($id)
     {
         $path = $this->buildPath($id);
         if (!is_file($path)) {
-            return null;
+            throw BlockNotFoundException::fromId($id);
         }
         return unserialize(file_get_contents($path));
     }
@@ -89,21 +72,5 @@ class Filesystem implements StorageInterface
     public function delete(BlockInterface $block)
     {
         unlink($this->buildPath($block->getId()));
-    }
-
-    /**
-     * @param $directory
-     */
-    private function checkDirectory($directory)
-    {
-        if (!file_exists($directory)) {
-            throw new \RuntimeException(sprintf('Couldn\'t create "%s".', $directory));
-        }
-        if (!is_readable($directory)) {
-            throw new \RuntimeException(sprintf('"%s" is not readable.', $directory));
-        }
-        if (!is_writable($directory)) {
-            throw new \RuntimeException(sprintf('"%s" is not writable.', $directory));
-        }
     }
 }

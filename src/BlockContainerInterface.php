@@ -16,7 +16,7 @@ interface BlockContainerInterface
      * all of the following ones by one. If the $position is NULL or does not exist, the block is appended at the end.
      *
      * @param BlockInterface $block
-     * @param int|null       $position
+     * @param int|null $position
      * @return void
      */
     public function addBlock(BlockInterface $block, $position = null);
@@ -34,7 +34,7 @@ interface BlockContainerInterface
 
     /**
      * @param BlockInterface $block
-     * @param int            $position
+     * @param int $position
      * @return void
      */
     public function moveBlock(BlockInterface $block, $position);

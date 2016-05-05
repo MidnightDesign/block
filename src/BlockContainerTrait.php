@@ -2,34 +2,30 @@
 
 namespace Midnight\Block;
 
-use SplDoublyLinkedList;
-use Zend\Stdlib\ArrayUtils;
-
 trait BlockContainerTrait
 {
     /**
-     * @var BlockInterface[]|SplDoublyLinkedList
+     * @var BlockInterface[]
      */
-    private $blocks;
+    private $blocks = [];
 
     /**
      * @param BlockInterface $block
-     * @param int|null       $position
+     * @param int|null $position
      * @return void
      */
     public function addBlock(BlockInterface $block, $position = null)
     {
-        $this->ensureBlocks();
         if ($this->hasBlock($block)) {
             if (null !== $position) {
                 $this->moveBlock($block, $position);
             }
             return;
         }
-        if (null !== $position && $this->blocks->offsetExists($position)) {
-            $this->blocks->add($position, $block);
+        if ($position === null || !isset($this->blocks[$position])) {
+            $this->blocks[] = $block;
         } else {
-            $this->blocks->push($block);
+            array_splice($this->blocks, $position, 0, [$block]);
         }
     }
 
@@ -38,8 +34,7 @@ trait BlockContainerTrait
      */
     public function getBlocks()
     {
-        $this->ensureBlocks();
-        return ArrayUtils::iteratorToArray($this->blocks);
+        return $this->blocks;
     }
 
     /**
@@ -48,16 +43,16 @@ trait BlockContainerTrait
      */
     public function removeBlock(BlockInterface $block)
     {
-        foreach ($this->blocks as $index => $currentBlock) {
-            if ($currentBlock === $block) {
-                $this->blocks->offsetUnset($index);
-            }
+        $index = array_search($block, $this->blocks, true);
+        if ($index === false) {
+            return;
         }
+        array_splice($this->blocks, $index,1);
     }
 
     /**
      * @param BlockInterface $block
-     * @param int            $position
+     * @param int $position
      * @return void
      */
     public function moveBlock(BlockInterface $block, $position)
@@ -66,20 +61,8 @@ trait BlockContainerTrait
         $this->addBlock($block, $position);
     }
 
-    private function ensureBlocks()
-    {
-        if (null === $this->blocks) {
-            $this->blocks = new SplDoublyLinkedList();
-        }
-    }
-
     private function hasBlock(BlockInterface $block)
     {
-        foreach ($this->blocks as $index => $currentBlock) {
-            if ($currentBlock === $block) {
-                return true;
-            }
-        }
-        return false;
+        return array_search($block, $this->blocks, true) !== false;
     }
 }
