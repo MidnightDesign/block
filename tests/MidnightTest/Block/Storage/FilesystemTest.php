@@ -10,17 +10,11 @@ use PHPUnit_Framework_MockObject_MockObject;
 
 class FilesystemTest extends TestCase
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private static $directory;
-    /**
-     * @var Filesystem
-     */
+    /** @var Filesystem */
     private $storage;
-    /**
-     * @var BlockInterface|PHPUnit_Framework_MockObject_MockObject
-     */
+    /** @var BlockInterface|PHPUnit_Framework_MockObject_MockObject */
     private $block;
 
     public static function setUpBeforeClass()

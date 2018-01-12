@@ -7,16 +7,16 @@ use Midnight\Block\Exception\BlockNotFoundException;
 
 class BlockList implements BlockListInterface
 {
-    /**
-     * @var BlockInterface[]
-     */
+    /** @var BlockInterface[] */
     private $blocks;
 
     /**
      * @param BlockInterface $block
      * @param null|int $position
+     * @throws \Midnight\Block\Exception\BlockNotFoundException
+     * @throws BlockNotFoundException
      */
-    public function add(BlockInterface $block, $position = null): void
+    public function add(BlockInterface $block, ?int $position = null): void
     {
         $this->blocks[] = $block;
         if ($position !== null && isset($this->blocks[$position])) {
@@ -30,7 +30,7 @@ class BlockList implements BlockListInterface
      *
      * @throws Exception\BlockNotFoundException
      */
-    public function setPosition(BlockInterface $block, $position): void
+    public function setPosition(BlockInterface $block, int $position): void
     {
         foreach ($this->blocks as $index => $b) {
             if ($b === $block) {

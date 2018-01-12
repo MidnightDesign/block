@@ -10,25 +10,16 @@ use Midnight\Block\BlockInterface;
 use Midnight\Block\Storage\Doctrine;
 use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
-use PHPUnit_Framework_TestCase;
 
 class DoctrineTest extends TestCase
 {
-    /**
-     * @var Doctrine
-     */
+    /** @var Doctrine */
     private $storage;
-    /**
-     * @var BlockInterface
-     */
+    /** @var BlockInterface */
     private $block;
-    /**
-     * @var ObjectManager|PHPUnit_Framework_MockObject_MockObject
-     */
+    /** @var ObjectManager|PHPUnit_Framework_MockObject_MockObject */
     private $objectManager;
-    /**
-     * @var ObjectRepository|PHPUnit_Framework_MockObject_MockObject
-     */
+    /** @var ObjectRepository|PHPUnit_Framework_MockObject_MockObject */
     private $repository;
 
     public function setUp()

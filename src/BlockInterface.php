@@ -6,14 +6,14 @@ namespace Midnight\Block;
 interface BlockInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getId();
+    public function getId(): ?string;
 
     /**
      * @param string $id
      *
      * @return void
      */
-    public function setId($id);
+    public function setId(string $id): void;
 }

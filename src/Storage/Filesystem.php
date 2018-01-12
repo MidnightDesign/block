@@ -4,16 +4,16 @@ declare(strict_types=1);
 namespace Midnight\Block\Storage;
 
 use Midnight\Block\BlockInterface;
+use RuntimeException;
 
 class Filesystem implements StorageInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $directory;
 
     /**
      * @param string $directory
+     * @throws \RuntimeException
      */
     public function __construct($directory)
     {
@@ -29,7 +29,7 @@ class Filesystem implements StorageInterface
     {
         $id = $block->getId();
         if (!$id) {
-            $block->setId(uniqid());
+            $block->setId(uniqid('', true));
             $id = $block->getId();
         }
         file_put_contents($this->buildPath($id), serialize($block));
@@ -55,17 +55,20 @@ class Filesystem implements StorageInterface
 
     /**
      * @param string $directory
+     * @throws \RuntimeException
      */
     public function setDirectory($directory)
     {
         if (!file_exists($directory)) {
-            set_error_handler(function() { /* ignore errors */ });
-            mkdir($directory, 0777, true);
+            set_error_handler(function () { /* ignore errors */
+            });
+            if (!mkdir($directory) && !is_dir($directory)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $directory));
+            }
             restore_error_handler();
         }
         $this->checkDirectory($directory);
-        $directory = realpath(($directory));
-        $this->directory = $directory;
+        $this->directory = realpath($directory);
     }
 
     /**
@@ -73,7 +76,7 @@ class Filesystem implements StorageInterface
      *
      * @return BlockInterface|null
      */
-    public function load($id): ?BlockInterface
+    public function load(string $id): ?BlockInterface
     {
         $path = $this->buildPath($id);
         if (!is_file($path)) {
@@ -94,17 +97,19 @@ class Filesystem implements StorageInterface
 
     /**
      * @param string $directory
+     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     private function checkDirectory($directory)
     {
         if (!file_exists($directory)) {
-            throw new \RuntimeException(sprintf('Couldn\'t create "%s".', $directory));
+            throw new RuntimeException(sprintf('Couldn\'t create "%s".', $directory));
         }
         if (!is_readable($directory)) {
-            throw new \RuntimeException(sprintf('"%s" is not readable.', $directory));
+            throw new RuntimeException(sprintf('"%s" is not readable.', $directory));
         }
         if (!is_writable($directory)) {
-            throw new \RuntimeException(sprintf('"%s" is not writable.', $directory));
+            throw new RuntimeException(sprintf('"%s" is not writable.', $directory));
         }
     }
 }

@@ -19,13 +19,13 @@ class ClassSet implements ClassSetInterface
     /**
      * {@inheritdoc}
      */
-    public function add($class): void
+    public function add(string $class): void
     {
         $class = trim($class);
         if ($class === '') {
             return;
         }
-        if (!in_array($class, $this->classes)) {
+        if (!\in_array($class, $this->classes, true)) {
             $this->classes[] = $class;
         }
     }
@@ -35,7 +35,7 @@ class ClassSet implements ClassSetInterface
      */
     public function remove($class): void
     {
-        $key = array_search($class, $this->classes);
+        $key = array_search($class, $this->classes, true);
         if ($key !== false) {
             unset($this->classes[$key]);
         }
@@ -48,7 +48,7 @@ class ClassSet implements ClassSetInterface
     public static function toString(ClassSetInterface $classSet): string
     {
         $classes = $classSet->getAll();
-        if (0 === count($classes)) {
+        if (0 === \count($classes)) {
             return '';
         }
         return sprintf(' class="%s"', implode(' ', $classes));

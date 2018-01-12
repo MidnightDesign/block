@@ -5,9 +5,7 @@ namespace Midnight\Block;
 
 class Html extends AbstractBlock
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $html;
 
     /**

@@ -7,13 +7,10 @@ use Midnight\Block\BlockInterface;
 use MidnightTest\Block\Assets\BlockContainerImpl;
 use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
-use PHPUnit_Framework_TestCase;
 
 class BlockContainerTraitTest extends TestCase
 {
-    /**
-     * @var BlockContainerImpl
-     */
+    /** @var BlockContainerImpl */
     private $container;
 
     protected function setUp()

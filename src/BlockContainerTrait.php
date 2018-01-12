@@ -5,12 +5,11 @@ namespace Midnight\Block;
 
 use SplDoublyLinkedList;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\Exception\InvalidArgumentException;
 
 trait BlockContainerTrait
 {
-    /**
-     * @var BlockInterface[]|SplDoublyLinkedList
-     */
+    /** @var BlockInterface[]|SplDoublyLinkedList */
     private $blocks;
 
     /**
@@ -36,6 +35,8 @@ trait BlockContainerTrait
 
     /**
      * @return BlockInterface[]
+     * @throws \Zend\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function getBlocks(): array
     {

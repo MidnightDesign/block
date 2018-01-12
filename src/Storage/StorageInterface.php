@@ -12,19 +12,19 @@ interface StorageInterface
      *
      * @return void
      */
-    public function save(BlockInterface $block);
+    public function save(BlockInterface $block): void;
 
     /**
      * @param string $id
      *
-     * @return BlockInterface
+     * @return BlockInterface|null
      */
-    public function load($id);
+    public function load(string $id): ?BlockInterface;
 
     /**
      * @param BlockInterface $block
      *
      * @return void
      */
-    public function delete(BlockInterface $block);
+    public function delete(BlockInterface $block): void;
 }

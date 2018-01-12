@@ -4,14 +4,12 @@ declare(strict_types=1);
 namespace Midnight\Block\Storage;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Midnight\Block\BlockInterface;
 use Midnight\Block\AbstractBlock;
+use Midnight\Block\BlockInterface;
 
 class Doctrine implements StorageInterface
 {
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
     private $class = AbstractBlock::class;
@@ -33,7 +31,7 @@ class Doctrine implements StorageInterface
      *
      * @return BlockInterface
      */
-    public function load($id): BlockInterface
+    public function load(string $id): BlockInterface
     {
         return $this->getRepository()->find($id);
     }

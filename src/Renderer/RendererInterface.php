@@ -16,5 +16,5 @@ interface RendererInterface
      * @param BlockInterface $block
      * @return string
      */
-    public function render(BlockInterface $block);
+    public function render(BlockInterface $block): string;
 }

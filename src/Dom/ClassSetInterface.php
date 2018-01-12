@@ -10,7 +10,7 @@ interface ClassSetInterface
      *
      * @return string[]
      */
-    public function getAll();
+    public function getAll(): array;
 
     /**
      * Adds the specified class to the set
@@ -20,7 +20,7 @@ interface ClassSetInterface
      * @param string $class
      * @return void
      */
-    public function add($class);
+    public function add(string $class): void;
 
     /**
      * Removes the specified class from the set
@@ -30,5 +30,5 @@ interface ClassSetInterface
      * @param string $class
      * @return void
      */
-    public function remove($class);
+    public function remove($class): void;
 }

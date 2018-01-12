@@ -11,7 +11,7 @@ interface BlockListInterface
      *
      * @return void
      */
-    public function add(BlockInterface $block, $position = null);
+    public function add(BlockInterface $block, ?int $position = null): void;
 
     /**
      * @param BlockInterface $block
@@ -19,17 +19,17 @@ interface BlockListInterface
      *
      * @return void
      */
-    public function setPosition(BlockInterface $block, $position);
+    public function setPosition(BlockInterface $block, int $position): void;
 
     /**
      * @return BlockInterface[]
      */
-    public function getAll();
+    public function getAll(): array;
 
     /**
      * @param BlockInterface $block
      *
      * @return void
      */
-    public function remove(BlockInterface $block);
+    public function remove(BlockInterface $block): void;
 }
