@@ -12,7 +12,7 @@ class Html extends AbstractBlock
     /**
      * @return string
      */
-    public function getHtml()
+    public function getHtml(): string
     {
         return $this->html;
     }

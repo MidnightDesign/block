@@ -19,23 +19,23 @@ interface BlockContainerInterface
      * @param int|null       $position
      * @return void
      */
-    public function addBlock(BlockInterface $block, $position = null);
+    public function addBlock(BlockInterface $block, $position = null): void;
 
     /**
      * @return BlockInterface[]
      */
-    public function getBlocks();
+    public function getBlocks(): array;
 
     /**
      * @param BlockInterface $block
      * @return void
      */
-    public function removeBlock(BlockInterface $block);
+    public function removeBlock(BlockInterface $block): void;
 
     /**
      * @param BlockInterface $block
      * @param int            $position
      * @return void
      */
-    public function moveBlock(BlockInterface $block, $position);
+    public function moveBlock(BlockInterface $block, $position): void;
 }

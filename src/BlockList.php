@@ -15,7 +15,7 @@ class BlockList implements BlockListInterface
      * @param BlockInterface $block
      * @param null|int $position
      */
-    public function add(BlockInterface $block, $position = null)
+    public function add(BlockInterface $block, $position = null): void
     {
         $this->blocks[] = $block;
         if ($position !== null && isset($this->blocks[$position])) {
@@ -29,7 +29,7 @@ class BlockList implements BlockListInterface
      *
      * @throws Exception\BlockNotFoundException
      */
-    public function setPosition(BlockInterface $block, $position)
+    public function setPosition(BlockInterface $block, $position): void
     {
         foreach ($this->blocks as $index => $b) {
             if ($b === $block) {
@@ -56,7 +56,7 @@ class BlockList implements BlockListInterface
     /**
      * @return BlockInterface[]
      */
-    public function getAll()
+    public function getAll(): array
     {
         if (empty($this->blocks)) {
             $this->blocks = [];
@@ -69,7 +69,7 @@ class BlockList implements BlockListInterface
      *
      * @return void
      */
-    public function remove(BlockInterface $block)
+    public function remove(BlockInterface $block): void
     {
         $keys = array_keys($this->blocks, $block);
         foreach ($keys as $k) {

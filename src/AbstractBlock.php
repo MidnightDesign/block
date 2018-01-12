@@ -12,7 +12,7 @@ abstract class AbstractBlock implements BlockInterface
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -22,7 +22,7 @@ abstract class AbstractBlock implements BlockInterface
      *
      * @return void
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }

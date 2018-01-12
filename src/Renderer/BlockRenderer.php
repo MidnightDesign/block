@@ -16,7 +16,7 @@ class BlockRenderer implements RendererInterface
      * @param BlockInterface $block
      * @return string
      */
-    public function render(BlockInterface $block)
+    public function render(BlockInterface $block): string
     {
         $renderer = $this->getRenderer($block);
         return $renderer->render($block);
@@ -26,7 +26,7 @@ class BlockRenderer implements RendererInterface
      * @param BlockInterface $block
      * @return RendererInterface
      */
-    private function getRenderer(BlockInterface $block)
+    private function getRenderer(BlockInterface $block): RendererInterface
     {
         $blockClass = get_class($block);
         if (!isset($this->renderers[$blockClass])) {

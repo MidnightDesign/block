@@ -17,7 +17,7 @@ trait BlockContainerTrait
      * @param int|null       $position
      * @return void
      */
-    public function addBlock(BlockInterface $block, $position = null)
+    public function addBlock(BlockInterface $block, $position = null): void
     {
         $this->ensureBlocks();
         if ($this->hasBlock($block)) {
@@ -36,7 +36,7 @@ trait BlockContainerTrait
     /**
      * @return BlockInterface[]
      */
-    public function getBlocks()
+    public function getBlocks(): array
     {
         $this->ensureBlocks();
         return ArrayUtils::iteratorToArray($this->blocks);
@@ -46,7 +46,7 @@ trait BlockContainerTrait
      * @param BlockInterface $block
      * @return void
      */
-    public function removeBlock(BlockInterface $block)
+    public function removeBlock(BlockInterface $block): void
     {
         foreach ($this->blocks as $index => $currentBlock) {
             if ($currentBlock === $block) {
@@ -60,20 +60,20 @@ trait BlockContainerTrait
      * @param int            $position
      * @return void
      */
-    public function moveBlock(BlockInterface $block, $position)
+    public function moveBlock(BlockInterface $block, $position): void
     {
         $this->removeBlock($block);
         $this->addBlock($block, $position);
     }
 
-    private function ensureBlocks()
+    private function ensureBlocks(): void
     {
         if (null === $this->blocks) {
             $this->blocks = new SplDoublyLinkedList();
         }
     }
 
-    private function hasBlock(BlockInterface $block)
+    private function hasBlock(BlockInterface $block): bool
     {
         foreach ($this->blocks as $index => $currentBlock) {
             if ($currentBlock === $block) {

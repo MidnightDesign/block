@@ -4,6 +4,7 @@ namespace Midnight\Block\Storage;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Midnight\Block\BlockInterface;
+use Midnight\Block\AbstractBlock;
 
 class Doctrine implements StorageInterface
 {
@@ -12,14 +13,14 @@ class Doctrine implements StorageInterface
      */
     private $objectManager;
 
-    private $class = 'Midnight\Block\AbstractBlock';
+    private $class = AbstractBlock::class;
 
     /**
      * @param BlockInterface $block
      *
      * @return void
      */
-    public function save(BlockInterface $block)
+    public function save(BlockInterface $block): void
     {
         $objectManager = $this->getObjectManager();
         $objectManager->persist($block);
@@ -31,7 +32,7 @@ class Doctrine implements StorageInterface
      *
      * @return BlockInterface
      */
-    public function load($id)
+    public function load($id): BlockInterface
     {
         return $this->getRepository()->find($id);
     }
@@ -41,7 +42,7 @@ class Doctrine implements StorageInterface
      *
      * @return void
      */
-    public function delete(BlockInterface $block)
+    public function delete(BlockInterface $block): void
     {
         // TODO: Implement delete() method.
     }
@@ -57,7 +58,7 @@ class Doctrine implements StorageInterface
     /**
      * @return ObjectManager
      */
-    private function getObjectManager()
+    private function getObjectManager(): ObjectManager
     {
         return $this->objectManager;
     }
@@ -70,7 +71,7 @@ class Doctrine implements StorageInterface
     /**
      * @return string
      */
-    public function getClass()
+    public function getClass(): string
     {
         return $this->class;
     }

@@ -24,7 +24,7 @@ class Image extends AbstractBlock
     /**
      * @return string
      */
-    public function getSrc()
+    public function getSrc(): string
     {
         return $this->src;
     }
@@ -32,7 +32,7 @@ class Image extends AbstractBlock
     /**
      * @return ClassSetInterface
      */
-    public function getClasses()
+    public function getClasses(): ClassSetInterface
     {
         return $this->classes;
     }

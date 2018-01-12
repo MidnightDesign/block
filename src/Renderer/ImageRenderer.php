@@ -13,7 +13,7 @@ class ImageRenderer implements RendererInterface
      * @param Image|BlockInterface $block
      * @return string
      */
-    public function render(BlockInterface $block)
+    public function render(BlockInterface $block): string
     {
         if (!$block instanceof Image) {
             throw new InvalidArgumentException(sprintf('Expected %s, but got %s.', Image::class, get_class($block)));

@@ -4,6 +4,7 @@ namespace MidnightTest\Block\Storage;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
+use Midnight\Block\AbstractBlock;
 use Midnight\Block\BlockInterface;
 use Midnight\Block\Storage\Doctrine;
 use PHPUnit\Framework\TestCase;
@@ -31,19 +32,19 @@ class DoctrineTest extends TestCase
 
     public function setUp()
     {
-        $this->repository = $this->createMock('Doctrine\Common\Persistence\ObjectRepository');
+        $this->repository = $this->createMock(ObjectRepository::class);
 
-        $this->objectManager = $this->createMock('Doctrine\Common\Persistence\ObjectManager');
+        $this->objectManager = $this->createMock(ObjectManager::class);
         $this->objectManager
             ->expects($this->any())
             ->method('getRepository')
-            ->with('Midnight\Block\AbstractBlock')
+            ->with(AbstractBlock::class)
             ->will($this->returnValue($this->repository));
 
         $this->storage = new Doctrine();
         $this->storage->setObjectManager($this->objectManager);
 
-        $this->block = $this->createMock('Midnight\Block\BlockInterface');
+        $this->block = $this->createMock(BlockInterface::class);
     }
 
     public function testSave()

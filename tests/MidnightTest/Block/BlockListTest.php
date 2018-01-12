@@ -91,6 +91,6 @@ class BlockListTest extends TestCase
      */
     private function getMockBlock()
     {
-        return $this->createMock('Midnight\Block\BlockInterface');
+        return $this->createMock(BlockInterface::class);
     }
 }

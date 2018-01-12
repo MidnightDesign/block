@@ -24,7 +24,7 @@ class Filesystem implements StorageInterface
      *
      * @return void
      */
-    public function save(BlockInterface $block)
+    public function save(BlockInterface $block): void
     {
         $id = $block->getId();
         if (!$id) {
@@ -39,7 +39,7 @@ class Filesystem implements StorageInterface
      *
      * @return string
      */
-    private function buildPath($id)
+    private function buildPath($id): string
     {
         return $this->getDirectory() . DIRECTORY_SEPARATOR . $id;
     }
@@ -47,7 +47,7 @@ class Filesystem implements StorageInterface
     /**
      * @return string
      */
-    public function getDirectory()
+    public function getDirectory(): string
     {
         return $this->directory;
     }
@@ -72,7 +72,7 @@ class Filesystem implements StorageInterface
      *
      * @return BlockInterface|null
      */
-    public function load($id)
+    public function load($id): ?BlockInterface
     {
         $path = $this->buildPath($id);
         if (!is_file($path)) {
@@ -86,7 +86,7 @@ class Filesystem implements StorageInterface
      *
      * @return void
      */
-    public function delete(BlockInterface $block)
+    public function delete(BlockInterface $block): void
     {
         unlink($this->buildPath($block->getId()));
     }

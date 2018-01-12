@@ -10,7 +10,7 @@ class ClassSet implements ClassSetInterface
     /**
      * {@inheritdoc}
      */
-    public function getAll()
+    public function getAll(): array
     {
         return $this->classes;
     }
@@ -18,7 +18,7 @@ class ClassSet implements ClassSetInterface
     /**
      * {@inheritdoc}
      */
-    public function add($class)
+    public function add($class): void
     {
         $class = trim($class);
         if ($class === '') {
@@ -32,7 +32,7 @@ class ClassSet implements ClassSetInterface
     /**
      * {@inheritdoc}
      */
-    public function remove($class)
+    public function remove($class): void
     {
         $key = array_search($class, $this->classes);
         if ($key !== false) {
@@ -44,12 +44,12 @@ class ClassSet implements ClassSetInterface
      * @param ClassSetInterface $classSet
      * @return string
      */
-    public static function toString(ClassSetInterface $classSet)
+    public static function toString(ClassSetInterface $classSet): string
     {
         $classes = $classSet->getAll();
         if (0 === count($classes)) {
             return '';
         }
-        return sprintf(' class="%s"', join(' ', $classes));
+        return sprintf(' class="%s"', implode(' ', $classes));
     }
 }

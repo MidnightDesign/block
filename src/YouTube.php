@@ -18,7 +18,7 @@ class YouTube extends AbstractBlock
     /**
      * @return string
      */
-    public function getVideoId()
+    public function getVideoId(): string
     {
         return $this->videoId;
     }
