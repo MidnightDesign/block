@@ -5,7 +5,7 @@ namespace MidnightTest\Block\Storage;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
-use Midnight\Block\AbstractBlock;
+use Midnight\Block\MutableBlock;
 use Midnight\Block\BlockInterface;
 use Midnight\Block\Storage\Doctrine;
 use PHPUnit\Framework\TestCase;
@@ -30,7 +30,7 @@ class DoctrineTest extends TestCase
         $this->objectManager
             ->expects($this->any())
             ->method('getRepository')
-            ->with(AbstractBlock::class)
+            ->with(MutableBlock::class)
             ->will($this->returnValue($this->repository));
 
         $this->storage = new Doctrine();

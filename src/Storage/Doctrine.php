@@ -5,7 +5,7 @@ namespace Midnight\Block\Storage;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
-use Midnight\Block\AbstractBlock;
+use Midnight\Block\MutableBlock;
 use Midnight\Block\BlockInterface;
 
 class Doctrine implements StorageInterface
@@ -13,7 +13,7 @@ class Doctrine implements StorageInterface
     /** @var ObjectManager */
     private $objectManager;
     /** @var string */
-    private $class = AbstractBlock::class;
+    private $class = MutableBlock::class;
 
     public function save(BlockInterface $block): void
     {

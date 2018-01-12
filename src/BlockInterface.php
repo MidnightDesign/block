@@ -6,4 +6,8 @@ namespace Midnight\Block;
 interface BlockInterface
 {
     public function getId(): string;
+
+    public function getAttribute(string $name): string;
+
+    public function getTypeName(): string;
 }
