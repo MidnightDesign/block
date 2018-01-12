@@ -10,6 +10,7 @@ class YouTube extends AbstractBlock
 
     public function __construct(string $videoId)
     {
+        parent::__construct();
         $this->videoId = $videoId;
     }
 

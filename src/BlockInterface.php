@@ -5,7 +5,5 @@ namespace Midnight\Block;
 
 interface BlockInterface
 {
-    public function getId(): ?string;
-
-    public function setId(string $id): void;
+    public function getId(): string;
 }

@@ -15,12 +15,4 @@ class HtmlTest extends TestCase
         $block->setHtml($html);
         $this->assertEquals($html, $block->getHtml());
     }
-
-    public function testCanSetAndGetId()
-    {
-        $block = new Html();
-        $id = 'myId';
-        $block->setId($id);
-        $this->assertEquals($id, $block->getId());
-    }
 }

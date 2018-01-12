@@ -15,6 +15,7 @@ class Image extends AbstractBlock
 
     public function __construct(string $src)
     {
+        parent::__construct();
         $this->src = $src;
         $this->classes = new ClassSet();
     }
