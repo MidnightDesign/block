@@ -9,5 +9,5 @@ interface BlockRepositoryInterface
     /**
      * @throws Exception\UnknownBlockException
      */
-    public function findById(): BlockInterface;
+    public function findById(string $id): BlockInterface;
 }
