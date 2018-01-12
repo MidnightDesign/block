@@ -22,9 +22,9 @@ class Filesystem implements StorageInterface
     public function save(BlockInterface $block): void
     {
         $id = $block->getId();
-        if (!$id) {
-            $block->setId(uniqid('', true));
-            $id = $block->getId();
+        if ($id === null) {
+            $id = uniqid('', true);
+            $block->setId($id);
         }
         file_put_contents($this->buildPath($id), serialize($block));
     }
@@ -67,7 +67,11 @@ class Filesystem implements StorageInterface
 
     public function delete(BlockInterface $block): void
     {
-        unlink($this->buildPath($block->getId()));
+        $id = $block->getId();
+        if ($id === null) {
+            return;
+        }
+        unlink($this->buildPath($id));
     }
 
     /**

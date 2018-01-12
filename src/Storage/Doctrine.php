@@ -24,7 +24,9 @@ class Doctrine implements StorageInterface
 
     public function load(string $id): BlockInterface
     {
-        return $this->getRepository()->find($id);
+        $block = $this->getRepository()->find($id);
+        \assert($block instanceof BlockInterface);
+        return $block;
     }
 
     public function delete(BlockInterface $block): void
