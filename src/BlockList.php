@@ -13,19 +13,19 @@ class BlockList implements BlockListInterface
 
     /**
      * @param BlockInterface $block
-     * @param null|int       $position
+     * @param null|int $position
      */
     public function add(BlockInterface $block, $position = null)
     {
         $this->blocks[] = $block;
-        if (isset($this->blocks[$position])) {
+        if ($position !== null && isset($this->blocks[$position])) {
             $this->setPosition($block, $position);
         }
     }
 
     /**
      * @param BlockInterface $block
-     * @param int            $position
+     * @param int $position
      *
      * @throws Exception\BlockNotFoundException
      */
@@ -44,8 +44,8 @@ class BlockList implements BlockListInterface
 
     /**
      * @param array $array
-     * @param int   $from
-     * @param int   $to
+     * @param int $from
+     * @param int $to
      */
     private function moveElement(array &$array, $from, $to)
     {

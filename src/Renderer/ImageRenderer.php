@@ -16,7 +16,7 @@ class ImageRenderer implements RendererInterface
     public function render(BlockInterface $block)
     {
         if (!$block instanceof Image) {
-            throw new InvalidArgumentException(sprintf('Expected %, but got %s.', Image::class, get_class($block)));
+            throw new InvalidArgumentException(sprintf('Expected %s, but got %s.', Image::class, get_class($block)));
         }
         return sprintf('<img src="%s"%s />', $block->getSrc(), ClassSet::toString($block->getClasses()));
     }

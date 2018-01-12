@@ -70,7 +70,7 @@ class Filesystem implements StorageInterface
     /**
      * @param string $id
      *
-     * @return BlockInterface
+     * @return BlockInterface|null
      */
     public function load($id)
     {
@@ -92,7 +92,7 @@ class Filesystem implements StorageInterface
     }
 
     /**
-     * @param $directory
+     * @param string $directory
      */
     private function checkDirectory($directory)
     {

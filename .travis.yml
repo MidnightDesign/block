@@ -15,6 +15,7 @@ before_script:
   - travis_retry composer install --no-interaction --prefer-source
 
 script:
+  - vendor/bin/phpstan analyse src --level 7
   - phpunit --coverage-clover=coverage.clover
 
 sudo: false

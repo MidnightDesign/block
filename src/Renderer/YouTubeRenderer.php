@@ -15,7 +15,7 @@ class YouTubeRenderer implements RendererInterface
     public function render(BlockInterface $block)
     {
         if (!$block instanceof YouTube) {
-            throw new InvalidArgumentException(sprintf('Expected %, but got %s.', YouTube::class, get_class($block)));
+            throw new InvalidArgumentException(sprintf('Expected %s, but got %s.', YouTube::class, get_class($block)));
         }
         $template = '<iframe width="560" height="315" src="%s" frameborder="0" allowfullscreen></iframe>';
         return sprintf($template, $this->makeUrl($block));

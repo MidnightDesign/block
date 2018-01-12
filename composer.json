@@ -23,6 +23,7 @@
     },
     "require-dev": {
         "doctrine/common": "~2.4",
-        "phpunit/phpunit": "~4.6"
+        "phpunit/phpunit": "~4.6",
+        "phpstan/phpstan": "^0.9.1"
     }
 }
