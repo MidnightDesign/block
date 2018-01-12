@@ -6,9 +6,10 @@ use InvalidArgumentException;
 use Midnight\Block\BlockInterface;
 use Midnight\Block\Renderer\YouTubeRenderer;
 use Midnight\Block\YouTube;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
 
-class YouTubeRendererTest extends \PHPUnit_Framework_TestCase
+class YouTubeRendererTest extends TestCase
 {
     /** @var YouTubeRenderer */
     private $renderer;
@@ -27,7 +28,8 @@ class YouTubeRendererTest extends \PHPUnit_Framework_TestCase
 
         $expectedUrl = 'https://www.youtube.com/embed/' . $id;
         $this->assertEquals(
-            sprintf('<iframe width="560" height="315" src="%s" frameborder="0" allowfullscreen></iframe>', $expectedUrl),
+            sprintf('<iframe width="560" height="315" src="%s" frameborder="0" allowfullscreen></iframe>',
+                $expectedUrl),
             $rendered
         );
     }

@@ -4,9 +4,9 @@ namespace MidnightTest\Block;
 
 use Midnight\Block\Dom\ClassSetInterface;
 use Midnight\Block\Image;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ImageTest extends PHPUnit_Framework_TestCase
+class ImageTest extends TestCase
 {
     public function testGetSrc()
     {

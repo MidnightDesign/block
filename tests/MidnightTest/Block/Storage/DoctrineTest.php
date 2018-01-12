@@ -6,10 +6,11 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Midnight\Block\BlockInterface;
 use Midnight\Block\Storage\Doctrine;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 
-class DoctrineTest extends PHPUnit_Framework_TestCase
+class DoctrineTest extends TestCase
 {
     /**
      * @var Doctrine
@@ -30,9 +31,9 @@ class DoctrineTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->repository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
+        $this->repository = $this->createMock('Doctrine\Common\Persistence\ObjectRepository');
 
-        $this->objectManager = $this->getMock('Doctrine\Common\Persistence\ObjectManager');
+        $this->objectManager = $this->createMock('Doctrine\Common\Persistence\ObjectManager');
         $this->objectManager
             ->expects($this->any())
             ->method('getRepository')
@@ -42,7 +43,7 @@ class DoctrineTest extends PHPUnit_Framework_TestCase
         $this->storage = new Doctrine();
         $this->storage->setObjectManager($this->objectManager);
 
-        $this->block = $this->getMock('Midnight\Block\BlockInterface');
+        $this->block = $this->createMock('Midnight\Block\BlockInterface');
     }
 
     public function testSave()

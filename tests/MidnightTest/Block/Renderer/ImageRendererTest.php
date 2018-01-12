@@ -7,10 +7,10 @@ use Midnight\Block\BlockInterface;
 use Midnight\Block\Dom\ClassSet;
 use Midnight\Block\Image;
 use Midnight\Block\Renderer\ImageRenderer;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
-use PHPUnit_Framework_TestCase;
 
-class ImageRendererTest extends PHPUnit_Framework_TestCase
+class ImageRendererTest extends TestCase
 {
     /** @var ImageRenderer */
     private $renderer;

@@ -3,9 +3,9 @@
 namespace MidnightTest\Block;
 
 use Midnight\Block\YouTube;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class YouTubeTest extends PHPUnit_Framework_TestCase
+class YouTubeTest extends TestCase
 {
     const DEFAULT_ID = 'foo';
     /** @var YouTube */

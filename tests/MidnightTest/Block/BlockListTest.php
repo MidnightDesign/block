@@ -4,10 +4,11 @@ namespace MidnightTest\Block;
 
 use Midnight\Block\BlockInterface;
 use Midnight\Block\BlockList;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 
-class BlockListTest extends PHPUnit_Framework_TestCase
+class BlockListTest extends TestCase
 {
     public function testNewInstanceIsEmpty()
     {
@@ -90,6 +91,6 @@ class BlockListTest extends PHPUnit_Framework_TestCase
      */
     private function getMockBlock()
     {
-        return $this->getMock('Midnight\Block\BlockInterface');
+        return $this->createMock('Midnight\Block\BlockInterface');
     }
 }

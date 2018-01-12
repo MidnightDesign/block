@@ -5,10 +5,10 @@ namespace MidnightTest\Block\Renderer;
 use Midnight\Block\BlockInterface;
 use Midnight\Block\Renderer\BlockRenderer;
 use Midnight\Block\Renderer\RendererInterface;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
-use PHPUnit_Framework_TestCase;
 
-class BlockRendererTest extends PHPUnit_Framework_TestCase
+class BlockRendererTest extends TestCase
 {
     /** @var BlockRenderer */
     private $renderer;

@@ -3,8 +3,9 @@
 namespace MidnightTest\Block\Dom;
 
 use Midnight\Block\Dom\ClassSet;
+use PHPUnit\Framework\TestCase;
 
-class ClassSetTest extends \PHPUnit_Framework_TestCase
+class ClassSetTest extends TestCase
 {
     /** @var ClassSet */
     private $set;
