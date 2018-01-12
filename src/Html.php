@@ -8,18 +8,12 @@ class Html extends AbstractBlock
     /** @var string */
     private $html;
 
-    /**
-     * @return string
-     */
     public function getHtml(): string
     {
         return $this->html;
     }
 
-    /**
-     * @param string $html
-     */
-    public function setHtml($html)
+    public function setHtml(string $html): void
     {
         $this->html = $html;
     }

@@ -12,19 +12,13 @@ class Filesystem implements StorageInterface
     private $directory;
 
     /**
-     * @param string $directory
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
-    public function __construct($directory)
+    public function __construct(string $directory)
     {
         $this->setDirectory($directory);
     }
 
-    /**
-     * @param BlockInterface $block
-     *
-     * @return void
-     */
     public function save(BlockInterface $block): void
     {
         $id = $block->getId();
@@ -35,35 +29,26 @@ class Filesystem implements StorageInterface
         file_put_contents($this->buildPath($id), serialize($block));
     }
 
-    /**
-     * @param string $id
-     *
-     * @return string
-     */
-    private function buildPath($id): string
+    private function buildPath(string $id): string
     {
         return $this->getDirectory() . DIRECTORY_SEPARATOR . $id;
     }
 
-    /**
-     * @return string
-     */
     public function getDirectory(): string
     {
         return $this->directory;
     }
 
     /**
-     * @param string $directory
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
-    public function setDirectory($directory)
+    public function setDirectory(string $directory)
     {
         if (!file_exists($directory)) {
             set_error_handler(function () { /* ignore errors */
             });
             if (!mkdir($directory) && !is_dir($directory)) {
-                throw new \RuntimeException(sprintf('Directory "%s" was not created', $directory));
+                throw new RuntimeException(sprintf('Directory "%s" was not created', $directory));
             }
             restore_error_handler();
         }
@@ -71,11 +56,6 @@ class Filesystem implements StorageInterface
         $this->directory = realpath($directory);
     }
 
-    /**
-     * @param string $id
-     *
-     * @return BlockInterface|null
-     */
     public function load(string $id): ?BlockInterface
     {
         $path = $this->buildPath($id);
@@ -85,22 +65,15 @@ class Filesystem implements StorageInterface
         return unserialize(file_get_contents($path));
     }
 
-    /**
-     * @param BlockInterface $block
-     *
-     * @return void
-     */
     public function delete(BlockInterface $block): void
     {
         unlink($this->buildPath($block->getId()));
     }
 
     /**
-     * @param string $directory
-     * @throws \RuntimeException
      * @throws RuntimeException
      */
-    private function checkDirectory($directory)
+    private function checkDirectory(string $directory)
     {
         if (!file_exists($directory)) {
             throw new RuntimeException(sprintf('Couldn\'t create "%s".', $directory));

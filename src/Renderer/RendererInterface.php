@@ -5,16 +5,7 @@ namespace Midnight\Block\Renderer;
 
 use Midnight\Block\BlockInterface;
 
-/**
- * Interface RendererInterface
- *
- * @package Midnight\Block\Renderer
- */
 interface RendererInterface
 {
-    /**
-     * @param BlockInterface $block
-     * @return string
-     */
     public function render(BlockInterface $block): string;
 }

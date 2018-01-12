@@ -8,17 +8,11 @@ class ClassSet implements ClassSetInterface
     /** @var string[] */
     private $classes = [];
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAll(): array
     {
         return $this->classes;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function add(string $class): void
     {
         $class = trim($class);
@@ -30,10 +24,7 @@ class ClassSet implements ClassSetInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function remove($class): void
+    public function remove(string $class): void
     {
         $key = array_search($class, $this->classes, true);
         if ($key !== false) {
@@ -41,10 +32,6 @@ class ClassSet implements ClassSetInterface
         }
     }
 
-    /**
-     * @param ClassSetInterface $classSet
-     * @return string
-     */
     public static function toString(ClassSetInterface $classSet): string
     {
         $classes = $classSet->getAll();

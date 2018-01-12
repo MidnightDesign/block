@@ -7,17 +7,10 @@ use InvalidArgumentException;
 use Midnight\Block\BlockInterface;
 use Midnight\Block\Html;
 
-/**
- * Class HtmlRenderer
- *
- * @package Midnight\Block\Renderer
- */
 class HtmlRenderer implements RendererInterface
 {
     /**
-     * @param Html|BlockInterface $block
-     * @return string
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function render(BlockInterface $block): string
     {

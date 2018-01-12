@@ -12,20 +12,15 @@ class BlockRenderer implements RendererInterface
     private $renderers = [];
 
     /**
-     * @param BlockInterface $block
-     * @return string
-     * @throws \Midnight\Block\Renderer\Exception\NoRendererFoundException
+     * @throws NoRendererFoundException
      */
     public function render(BlockInterface $block): string
     {
-        $renderer = $this->getRenderer($block);
-        return $renderer->render($block);
+        return $this->getRenderer($block)->render($block);
     }
 
     /**
-     * @param BlockInterface $block
-     * @return RendererInterface
-     * @throws \Midnight\Block\Renderer\Exception\NoRendererFoundException
+     * @throws NoRendererFoundException
      */
     private function getRenderer(BlockInterface $block): RendererInterface
     {
@@ -36,11 +31,7 @@ class BlockRenderer implements RendererInterface
         return $this->renderers[$blockClass];
     }
 
-    /**
-     * @param string            $className
-     * @param RendererInterface $renderer
-     */
-    public function setRenderer($className, RendererInterface $renderer)
+    public function setRenderer(string $className, RendererInterface $renderer): void
     {
         $this->renderers[$className] = $renderer;
     }

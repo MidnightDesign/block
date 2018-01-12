@@ -12,12 +12,7 @@ trait BlockContainerTrait
     /** @var BlockInterface[]|SplDoublyLinkedList */
     private $blocks;
 
-    /**
-     * @param BlockInterface $block
-     * @param int|null       $position
-     * @return void
-     */
-    public function addBlock(BlockInterface $block, $position = null): void
+    public function addBlock(BlockInterface $block, ?int $position = null): void
     {
         $this->ensureBlocks();
         if ($this->hasBlock($block)) {
@@ -35,7 +30,6 @@ trait BlockContainerTrait
 
     /**
      * @return BlockInterface[]
-     * @throws \Zend\Stdlib\Exception\InvalidArgumentException
      * @throws InvalidArgumentException
      */
     public function getBlocks(): array
@@ -44,10 +38,6 @@ trait BlockContainerTrait
         return ArrayUtils::iteratorToArray($this->blocks);
     }
 
-    /**
-     * @param BlockInterface $block
-     * @return void
-     */
     public function removeBlock(BlockInterface $block): void
     {
         foreach ($this->blocks as $index => $currentBlock) {
@@ -57,12 +47,7 @@ trait BlockContainerTrait
         }
     }
 
-    /**
-     * @param BlockInterface $block
-     * @param int            $position
-     * @return void
-     */
-    public function moveBlock(BlockInterface $block, $position): void
+    public function moveBlock(BlockInterface $block, int $position): void
     {
         $this->removeBlock($block);
         $this->addBlock($block, $position);

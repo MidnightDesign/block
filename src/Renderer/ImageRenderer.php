@@ -11,9 +11,7 @@ use Midnight\Block\Image;
 class ImageRenderer implements RendererInterface
 {
     /**
-     * @param Image|BlockInterface $block
-     * @return string
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function render(BlockInterface $block): string
     {

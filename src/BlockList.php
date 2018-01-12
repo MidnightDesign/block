@@ -11,8 +11,6 @@ class BlockList implements BlockListInterface
     private $blocks;
 
     /**
-     * @param BlockInterface $block
-     * @param null|int $position
      * @throws \Midnight\Block\Exception\BlockNotFoundException
      * @throws BlockNotFoundException
      */
@@ -25,9 +23,6 @@ class BlockList implements BlockListInterface
     }
 
     /**
-     * @param BlockInterface $block
-     * @param int $position
-     *
      * @throws Exception\BlockNotFoundException
      */
     public function setPosition(BlockInterface $block, int $position): void
@@ -43,12 +38,7 @@ class BlockList implements BlockListInterface
         $this->moveElement($this->blocks, $oldPosition, $position);
     }
 
-    /**
-     * @param array $array
-     * @param int $from
-     * @param int $to
-     */
-    private function moveElement(array &$array, $from, $to)
+    private function moveElement(array &$array, int $from, int $to): void
     {
         $out = array_splice($array, $from, 1);
         array_splice($array, $to, 0, $out);
@@ -65,11 +55,6 @@ class BlockList implements BlockListInterface
         return $this->blocks;
     }
 
-    /**
-     * @param BlockInterface $block
-     *
-     * @return void
-     */
     public function remove(BlockInterface $block): void
     {
         $keys = array_keys($this->blocks, $block);

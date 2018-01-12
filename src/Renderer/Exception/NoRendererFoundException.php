@@ -7,5 +7,4 @@ use LogicException;
 
 class NoRendererFoundException extends LogicException
 {
-
 }

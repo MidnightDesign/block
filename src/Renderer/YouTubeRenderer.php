@@ -10,9 +10,7 @@ use Midnight\Block\YouTube;
 class YouTubeRenderer implements RendererInterface
 {
     /**
-     * @param YouTube|BlockInterface $block
-     * @return string
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function render(BlockInterface $block): string
     {
@@ -23,10 +21,6 @@ class YouTubeRenderer implements RendererInterface
         return sprintf($template, $this->makeUrl($block));
     }
 
-    /**
-     * @param YouTube $block
-     * @return string
-     */
     private function makeUrl(YouTube $block): string
     {
         return sprintf('https://www.youtube.com/embed/%s', $block->getVideoId());

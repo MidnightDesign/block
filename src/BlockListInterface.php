@@ -5,20 +5,8 @@ namespace Midnight\Block;
 
 interface BlockListInterface
 {
-    /**
-     * @param BlockInterface $block
-     * @param int|null       $position
-     *
-     * @return void
-     */
     public function add(BlockInterface $block, ?int $position = null): void;
 
-    /**
-     * @param BlockInterface $block
-     * @param int            $position
-     *
-     * @return void
-     */
     public function setPosition(BlockInterface $block, int $position): void;
 
     /**
@@ -26,10 +14,5 @@ interface BlockListInterface
      */
     public function getAll(): array;
 
-    /**
-     * @param BlockInterface $block
-     *
-     * @return void
-     */
     public function remove(BlockInterface $block): void;
 }
