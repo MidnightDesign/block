@@ -14,18 +14,12 @@
             "Midnight\\Block\\": "src"
         }
     },
-    "suggest": {
-        "doctrine/orm": "Add support for the Doctrine storage adapter"
-    },
     "require": {
         "php": "^7.1",
         "psr/container": "^1.0",
-        "ramsey/uuid": "^3.7",
-        "zendframework/zend-servicemanager": "^3.3",
-        "zendframework/zend-view": "^2.9"
+        "ramsey/uuid": "^3.7"
     },
     "require-dev": {
-        "doctrine/common": "~2.4",
         "phpunit/phpunit": "~6.5",
         "phpstan/phpstan": "^0.9.1"
     },

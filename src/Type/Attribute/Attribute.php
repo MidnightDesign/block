@@ -9,10 +9,9 @@ class Attribute implements AttributeInterface
     /** @var string|null */
     private $default;
 
-    public function __construct(string $name, ?string $default)
+    public function __construct(string $name)
     {
         $this->name = $name;
-        $this->default = $default;
     }
 
     public function getName(): string
@@ -23,6 +22,13 @@ class Attribute implements AttributeInterface
     public function getDefault(): ?string
     {
         return $this->default;
+    }
+
+    public function withDefault(string $value): self
+    {
+        $clone = clone $this;
+        $clone->name = $value;
+        return $clone;
     }
 
     /**
