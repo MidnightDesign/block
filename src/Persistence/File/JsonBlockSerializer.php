@@ -3,6 +3,7 @@
 namespace Midnight\Block\Persistence\File;
 
 use Midnight\Block\Block;
+use Midnight\Block\Persistence\File\Exception\SerializationException;
 
 final class JsonBlockSerializer implements BlockSerializerInterface
 {
@@ -13,6 +14,10 @@ final class JsonBlockSerializer implements BlockSerializerInterface
 
     public function deserialize(string $serialized): Block
     {
-        return Block::deserialize(\json_decode($serialized, true));
+        $data = \json_decode($serialized, true);
+        if ($data === null) {
+            throw new SerializationException(\json_last_error_msg());
+        }
+        return Block::deserialize($data);
     }
 }

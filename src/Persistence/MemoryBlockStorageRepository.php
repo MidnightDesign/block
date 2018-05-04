@@ -10,9 +10,11 @@ final class MemoryBlockStorageRepository implements BlockStorageInterface, Block
     /** @var Block[] */
     private $blocks = [];
 
-    public function persist(Block $block): void
+    public function persist(Block ...$blocks): void
     {
-        $this->blocks[$block->getId()] = $block;
+        foreach ($blocks as $block) {
+            $this->blocks[$block->getId()] = $block;
+        }
     }
 
     /**
@@ -25,5 +27,10 @@ final class MemoryBlockStorageRepository implements BlockStorageInterface, Block
             throw UnknownBlockException::fromId($id);
         }
         return $this->blocks[$id];
+    }
+
+    public function findAll(): array
+    {
+        return \array_values($this->blocks);
     }
 }

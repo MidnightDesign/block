@@ -6,5 +6,5 @@ use Midnight\Block\Block;
 
 interface BlockStorageInterface
 {
-    public function persist(Block $block): void;
+    public function persist(Block ...$blocks): void;
 }

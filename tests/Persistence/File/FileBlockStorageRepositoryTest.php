@@ -21,4 +21,19 @@ class FileBlockStorageRepositoryTest extends TestCase
         $this->assertTrue($loaded->equals($block));
         \unlink($id . '.json');
     }
+
+    public function testFindAllWithDefaults()
+    {
+        \chdir(__DIR__);
+        $repository = new FileBlockStorageRepository();
+        $blocks = [new Block(), new Block(), new Block()];
+
+        $repository->persist(...$blocks);
+        $loadedBlocks = $repository->findAll();
+
+        $this->assertCount(\count($blocks), $loadedBlocks);
+        foreach ($blocks as $block) {
+            \unlink($block->getId() . '.json');
+        }
+    }
 }

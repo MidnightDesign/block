@@ -10,4 +10,9 @@ interface BlockRepositoryInterface
      * @throws Exception\UnknownBlockException
      */
     public function findById(string $id): Block;
+
+    /**
+     * @return Block[]
+     */
+    public function findAll(): array;
 }

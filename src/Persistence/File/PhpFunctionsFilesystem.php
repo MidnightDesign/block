@@ -13,4 +13,17 @@ final class PhpFunctionsFilesystem implements FilesystemInterface
     {
         return \file_get_contents($fileName);
     }
+
+    /**
+     * @return string[]
+     */
+    public function readFiles(): array
+    {
+        $files = [];
+        $directoryIterator = new \DirectoryIterator('.');
+        foreach ($directoryIterator as $fileName) {
+            $files[] = $this->readFile($fileName->getPathname());
+        }
+        return $files;
+    }
 }

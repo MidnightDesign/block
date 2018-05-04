@@ -27,7 +27,7 @@ class TypeMapBlockRendererTest extends TestCase
     {
         $rendered = $this->renderer->render((new Block())->withType('bar'));
 
-        $this->assertSame('My RenderedBar', $rendered);
+        $this->assertSame('My Rendered Bar', $rendered);
     }
 
     public function testThrowsAnExceptionIfTheTypeIsUnknown()

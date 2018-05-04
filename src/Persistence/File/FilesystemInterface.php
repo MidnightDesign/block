@@ -7,4 +7,9 @@ interface FilesystemInterface
     public function writeFile(string $fileName, string $content): void;
 
     public function readFile(string $fileName): string;
+
+    /**
+     * @return string[]
+     */
+    public function readFiles(): array;
 }

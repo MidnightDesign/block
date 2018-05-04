@@ -5,6 +5,7 @@ namespace Midnight\Block\Persistence\File;
 use Midnight\Block\Block;
 use Midnight\Block\Persistence\BlockRepositoryInterface;
 use Midnight\Block\Persistence\BlockStorageInterface;
+use Midnight\Block\Persistence\File\Exception\SerializationException;
 
 final class FileBlockStorageRepository implements BlockStorageInterface, BlockRepositoryInterface
 {
@@ -25,11 +26,13 @@ final class FileBlockStorageRepository implements BlockStorageInterface, BlockRe
         $this->serializer = $serializer ?? new JsonBlockSerializer();
     }
 
-    public function persist(Block $block): void
+    public function persist(Block ...$blocks): void
     {
-        $fileName = $this->fileNameBuilder->fromBlock($block);
-        $fileContent = $this->serializer->serialize($block);
-        $this->filesystem->writeFile($fileName, $fileContent);
+        foreach ($blocks as $block) {
+            $fileName = $this->fileNameBuilder->fromBlock($block);
+            $fileContent = $this->serializer->serialize($block);
+            $this->filesystem->writeFile($fileName, $fileContent);
+        }
     }
 
     public function findById(string $id): Block
@@ -37,5 +40,20 @@ final class FileBlockStorageRepository implements BlockStorageInterface, BlockRe
         $fileName = $this->fileNameBuilder->fromId($id);
         $serialized = $this->filesystem->readFile($fileName);
         return $this->serializer->deserialize($serialized);
+    }
+
+    public function findAll(): array
+    {
+        $fileContents = $this->filesystem->readFiles();
+        return \array_filter(\array_map([$this, 'deserialize'], $fileContents));
+    }
+
+    private function deserialize(string $serialized): ?Block
+    {
+        try {
+            return $this->serializer->deserialize($serialized);
+        } catch (SerializationException $ignored) {
+            return null;
+        }
     }
 }

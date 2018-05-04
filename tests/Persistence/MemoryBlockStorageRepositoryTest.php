@@ -2,6 +2,7 @@
 
 namespace Midnight\Test\Block\Persistence;
 
+use Midnight\Block\Block;
 use Midnight\Block\Persistence\Exception\UnknownBlockException;
 use Midnight\Block\Persistence\MemoryBlockStorageRepository;
 use PHPUnit\Framework\TestCase;
@@ -23,5 +24,15 @@ class MemoryBlockStorageRepositoryTest extends TestCase
         $this->expectException(UnknownBlockException::class);
 
         $this->storageRepository->findById('does-not-exist');
+    }
+
+    public function testFindAllWithDefaults()
+    {
+        $blocks = [new Block(), new Block(), new Block()];
+
+        $this->storageRepository->persist(...$blocks);
+        $loadedBlocks = $this->storageRepository->findAll();
+
+        $this->assertCount(\count($blocks), $loadedBlocks);
     }
 }
