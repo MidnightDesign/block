@@ -4,10 +4,10 @@ namespace Midnight\Block\Persistence\Exception;
 
 use RuntimeException;
 
-class UnknownBlockException extends RuntimeException
+final class UnknownBlockException extends RuntimeException
 {
     public static function fromId(string $id): self
     {
-        return new self(\sprintf('Unknown block ID "%s".', $id));
+        return new self(\sprintf('Unknown block ID %s.', $id));
     }
 }

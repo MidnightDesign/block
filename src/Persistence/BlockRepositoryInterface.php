@@ -2,12 +2,12 @@
 
 namespace Midnight\Block\Persistence;
 
-use Midnight\Block\BlockInterface;
+use Midnight\Block\Block;
 
 interface BlockRepositoryInterface
 {
     /**
      * @throws Exception\UnknownBlockException
      */
-    public function findById(string $id): BlockInterface;
+    public function findById(string $id): Block;
 }
