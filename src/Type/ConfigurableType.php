@@ -3,6 +3,7 @@
 namespace Midnight\Block\Type;
 
 use Midnight\Block\Block;
+use Midnight\Block\Exception\MissingPropertyException;
 
 final class ConfigurableType
 {
@@ -12,9 +13,12 @@ final class ConfigurableType
     /** @var Field[] */
     private $fields = [];
 
+    /**
+     * @throws MissingPropertyException
+     */
     public static function extractTemplate(Block $block): string
     {
-        return $block->getString(self::TEMPLATE);
+        return TypeUtil::forceGetString($block, self::TEMPLATE);
     }
 
     public static function injectTemplate(Block $block, string $template): Block

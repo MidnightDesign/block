@@ -30,5 +30,8 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "scripts": {
+        "phpstan": "phpstan analyse src --level 7"
     }
 }

@@ -24,6 +24,6 @@ final class YouTubeType extends AbstractType implements BlockRendererInterface
      */
     public function render(Block $block): string
     {
-        return \sprintf(self::TEMPLATE, self::forceGetString($block, self::VIDEO_ID));
+        return \sprintf(self::TEMPLATE, TypeUtil::forceGetString($block, self::VIDEO_ID));
     }
 }
