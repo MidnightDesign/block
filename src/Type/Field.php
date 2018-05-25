@@ -10,6 +10,9 @@ final class Field
     private const STRING = 'string';
     private const ARRAY = 'array';
     private const TYPES = [self::STRING, self::ARRAY];
+    private const TYPE = 'type';
+    private const NAME = 'name';
+    private const IS_REQUIRED = 'is_required';
     /** @var string */
     private $type;
     /** @var string */
@@ -40,6 +43,18 @@ final class Field
     public static function array(string $name): self
     {
         return new self(self::ARRAY, $name);
+    }
+
+    /**
+     * @throws Exception\InvalidFieldTypeException
+     */
+    public static function deserialize(array $data): self
+    {
+        $field = new self($data[self::TYPE], $data[self::NAME]);
+        if (isset($data[self::IS_REQUIRED])) {
+            $field->isRequired = $data[self::IS_REQUIRED];
+        }
+        return $field;
     }
 
     private static function isValidType(string $type): bool
@@ -79,6 +94,15 @@ final class Field
         $clone = clone $this;
         $clone->isRequired = true;
         return $clone;
+    }
+
+    public function serialize(): array
+    {
+        return [
+            self::TYPE => $this->type,
+            self::NAME => $this->name,
+            self::IS_REQUIRED => $this->isRequired,
+        ];
     }
 
     /**
