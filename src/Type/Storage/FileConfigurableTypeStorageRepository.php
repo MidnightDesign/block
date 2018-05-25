@@ -29,13 +29,34 @@ final class FileConfigurableTypeStorageRepository implements ConfigurableTypeSto
         if (!\file_exists($path)) {
             throw UnknownConfigurableTypeException::fromId($id);
         }
-        $json = \file_get_contents($path);
-        $data = \json_decode($json, true);
-        return ConfigurableType::deserialize($data);
+        return $this->loadFromFile($path);
+    }
+
+    /**
+     * @return ConfigurableType[]
+     */
+    public function findAll(): array
+    {
+        $types = [];
+        $directoryIterator = new \DirectoryIterator($this->filePrefix);
+        foreach ($directoryIterator as $file) {
+            if (!$file->isFile()) {
+                continue;
+            }
+            $types[] = $this->loadFromFile($file->getPathname());
+        }
+        return $types;
     }
 
     private function buildPath(string $id): string
     {
         return $this->filePrefix . $id . '.json';
+    }
+
+    private function loadFromFile(string $path): ConfigurableType
+    {
+        $json = \file_get_contents($path);
+        $data = \json_decode($json, true);
+        return ConfigurableType::deserialize($data);
     }
 }

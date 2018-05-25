@@ -24,4 +24,12 @@ final class MemoryConfigurableTypeStorageRepository implements ConfigurableTypeR
         }
         return $this->types[$id];
     }
+
+    /**
+     * @return ConfigurableType[]
+     */
+    public function findAll(): array
+    {
+        return \array_values($this->types);
+    }
 }

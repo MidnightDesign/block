@@ -11,4 +11,9 @@ interface ConfigurableTypeRepositoryInterface
      * @throws UnknownConfigurableTypeException
      */
     public function findById(string $id): ConfigurableType;
+
+    /**
+     * @return ConfigurableType[]
+     */
+    public function findAll(): array;
 }

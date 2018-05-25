@@ -35,4 +35,14 @@ class MemoryConfigurableTypeStorageRepositoryTest extends TestCase
 
         $this->repository->findById('does-not-exist.json');
     }
+
+    public function testFindAll()
+    {
+        $this->repository->save(new ConfigurableType());
+        $this->repository->save(new ConfigurableType());
+
+        $types = $this->repository->findAll();
+
+        $this->assertCount(2, $types);
+    }
 }
